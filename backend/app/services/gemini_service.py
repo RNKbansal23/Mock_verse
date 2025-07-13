@@ -21,3 +21,42 @@ def generate_follow_up_question(conversation_history: list[str]) -> str:
 
     response = model.generate_content(prompt)
     return response.text
+# In file: backend/app/services/gemini_service.py
+# (Add this function at the end of the file)
+
+def generate_interview_feedback(conversation_history: list[str]) -> str:
+    transcript = "\n".join(conversation_history)
+
+    prompt = f"""
+    You are an expert hiring manager reviewing an interview transcript.
+    Your task is to provide structured feedback based on the conversation below.
+    Analyze the candidate's responses for clarity, relevance, and depth.
+    
+    Please provide your feedback STRICTLY in the following JSON format. Do not add any text before or after the JSON object.
+
+    {{
+        "overallSummary": "A brief, one-paragraph summary of the candidate's performance.",
+        "strengths": [
+            "A point about what the candidate did well.",
+            "Another point about a strength.",
+            "A third strength."
+        ],
+        "areasForImprovement": [
+            "A specific, actionable suggestion for improvement.",
+            "Another area for improvement."
+        ],
+        "score": <an integer score out of 10 for overall performance>
+    }}
+
+    Here is the interview transcript:
+    --- TRANSCRIPT ---
+    {transcript}
+    --- END TRANSCRIPT ---
+    """
+
+    response = model.generate_content(prompt)
+    
+    # Clean up the response to ensure it's valid JSON
+    # Sometimes the model might add markdown backticks (```json ... ```)
+    cleaned_response = response.text.strip().replace("```json", "").replace("```", "")
+    return cleaned_response

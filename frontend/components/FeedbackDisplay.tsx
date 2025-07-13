@@ -6,8 +6,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { InterviewFeedback } from "@/lib/types";
-import { getInterviewResults } from "@/lib/mockApi";
+import { InterviewFeedback } from "@/lib/types"; // We will update types.ts
 
 export function FeedbackDisplay({ sessionId }: { sessionId: string }) {
   const [feedback, setFeedback] = useState<InterviewFeedback | null>(null);
@@ -17,57 +16,72 @@ export function FeedbackDisplay({ sessionId }: { sessionId: string }) {
   useEffect(() => {
     const fetchFeedback = async () => {
       setIsLoading(true);
-      // BACKEND: Get the mock feedback
-      const results = await getInterviewResults(sessionId);
-      setFeedback(results);
-      setIsLoading(false);
+      try {
+        const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/interviews/${sessionId}/feedback`;
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+          throw new Error("Failed to fetch feedback");
+        }
+        const data: InterviewFeedback = await response.json();
+        setFeedback(data);
+      } catch (error) {
+        console.error(error);
+        // Handle error state if needed
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchFeedback();
   }, [sessionId]);
 
   if (isLoading) {
-    return <div className="text-center">
+    return (
+      <div className="text-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
-        <p className="mt-4">Analyzing your interview...</p>
-    </div>;
+        <p className="mt-4 text-xl">Our AI is analyzing your interview performance...</p>
+      </div>
+    );
   }
 
   if (!feedback) {
-    return <p>Could not load feedback.</p>;
+    return <p>Could not load feedback. Please try again.</p>;
   }
 
   return (
-    <div className="w-full max-w-3xl space-y-6">
-        <h1 className="text-4xl font-bold text-center">Your Interview Feedback</h1>
-        <Card className="bg-gray-800 border-gray-700">
-            <CardHeader>
-                <CardTitle>Overall Summary (Score: {feedback.score}/10)</CardTitle>
-            </CardHeader>
-            <CardContent><p>{feedback.overallSummary}</p></CardContent>
-        </Card>
+    <div className="w-full max-w-3xl space-y-6 animate-fade-in">
+      <h1 className="text-4xl font-bold text-center">Your Interview Scorecard</h1>
+      <Card className="bg-gray-800 border-gray-700">
+        <CardHeader>
+          <CardTitle className="flex justify-between items-center">
+            <span>Overall Summary</span>
+            <span className="text-2xl font-bold text-blue-400">Score: {feedback.score}/10</span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent><p className="text-gray-300">{feedback.overallSummary}</p></CardContent>
+      </Card>
 
-        <div className="grid md:grid-cols-2 gap-6">
-            <Card className="bg-green-900/50 border-green-700">
-                <CardHeader><CardTitle>Strengths</CardTitle></CardHeader>
-                <CardContent>
-                    <ul className="list-disc pl-5 space-y-2">
-                        {feedback.strengths.map((item, i) => <li key={i}>{item}</li>)}
-                    </ul>
-                </CardContent>
-            </Card>
-            <Card className="bg-yellow-900/50 border-yellow-700">
-                <CardHeader><CardTitle>Areas for Improvement</CardTitle></CardHeader>
-                <CardContent>
-                    <ul className="list-disc pl-5 space-y-2">
-                        {feedback.areasForImprovement.map((item, i) => <li key={i}>{item}</li>)}
-                    </ul>
-                </CardContent>
-            </Card>
-        </div>
-        <div className="text-center">
-            <Button onClick={() => router.push('/')}>Practice Again</Button>
-        </div>
+      <div className="grid md:grid-cols-2 gap-6">
+        <Card className="bg-green-900/50 border-green-700">
+          <CardHeader><CardTitle>✅ Strengths</CardTitle></CardHeader>
+          <CardContent>
+            <ul className="list-disc pl-5 space-y-2">
+              {feedback.strengths.map((item, i) => <li key={i}>{item}</li>)}
+            </ul>
+          </CardContent>
+        </Card>
+        <Card className="bg-yellow-900/50 border-yellow-700">
+          <CardHeader><CardTitle>💡 Areas for Improvement</CardTitle></CardHeader>
+          <CardContent>
+            <ul className="list-disc pl-5 space-y-2">
+              {feedback.areasForImprovement.map((item, i) => <li key={i}>{item}</li>)}
+            </ul>
+          </CardContent>
+        </Card>
+      </div>
+      <div className="text-center pt-4">
+        <Button onClick={() => router.push('/')} size="lg">Practice Again</Button>
+      </div>
     </div>
   );
 }

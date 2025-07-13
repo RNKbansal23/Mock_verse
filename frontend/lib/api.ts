@@ -1,17 +1,18 @@
 // In file: frontend/lib/api.ts
 
-import { InterviewResponse } from "./types"; // We'll update types.ts next
+import { InterviewResponse } from "./types";
 
 /**
  * Starts a new interview by calling the real FastAPI backend.
  * @param role The job role for the interview.
  * @param resumeFile The user's resume file (optional).
- * @returns The session ID and the first AI-generated question.
+ * @returns The session ID and the AI-generated first question.
  */
 export const startInterview = async (
   role: string,
   resumeFile: File | null
 ): Promise<InterviewResponse> => {
+  // UPDATED: We use FormData to send a file and text together.
   const formData = new FormData();
   formData.append("role", role);
 
@@ -19,25 +20,20 @@ export const startInterview = async (
     formData.append("resumeFile", resumeFile);
   }
 
-  // NOTE: Your backend needs to be updated to handle a file upload.
-  // For now, let's just send the role and an empty resume text.
-  // This is a placeholder for your friend to complete on the backend.
-  const payload = {
-    role: role,
-    resume_text: "User submitted a resume, but text extraction is not yet implemented on the backend.",
-  };
-
   const apiUrl = process.env.NEXT_PUBLIC_API_URL + "/api/v1/interviews";
 
+  // UPDATED: The fetch call is now simpler.
+  // We send the formData object directly.
+  // CRUCIAL: We do NOT set the 'Content-Type' header. The browser will do it
+  // for us automatically, including the necessary 'boundary' for multipart/form-data.
   const response = await fetch(apiUrl, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
+    body: formData, // Send the form data
   });
 
   if (!response.ok) {
+    const errorBody = await response.text();
+    console.error("Error from backend:", errorBody);
     throw new Error("Failed to start interview on the backend.");
   }
 
