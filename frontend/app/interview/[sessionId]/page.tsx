@@ -1,4 +1,4 @@
-
+'use client';
  import { InterviewWindow } from "@/components/InterviewWindow";
 
 export default function InterviewPage({ params }: { params: { sessionId: string } }) {

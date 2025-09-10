@@ -11,4 +11,4 @@ class InterviewResponse(BaseModel):
     first_question: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
