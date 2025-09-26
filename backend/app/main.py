@@ -1,20 +1,19 @@
-# In file: backend/app/main.py (Reverted to original version)
+# In file: backend/app/main.py (Final Corrected Version)
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .db import models, database
-from .api.v1 import endpoints, websockets # Using relative imports
+# Use ABSOLUTE imports, which are more reliable in Docker
+from app.db import models, database
+from app.api.v1 import endpoints, websockets
 
-# This command creates the database tables if they don't exist
 models.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI(title="MockVerse API")
 
-# Keep the deployed URL in the origins list for future use
 origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://mock-verse.vercel.app", # Replace with your actual Vercel URL
+    "https://mock-verse.vercel.app", # Make sure this matches your Vercel URL
 ]
 
 app.add_middleware(
