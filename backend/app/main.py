@@ -2,10 +2,10 @@
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .db import models, database
+from app.db import models, database
 
 # --- THIS LINE IS CRITICAL ---
-from .api.v1 import endpoints, websockets # Import the new routers
+from app.api.v1 import endpoints, websockets # Import the new routers
 
 # This command creates the database tables if they don't exist
 models.Base.metadata.create_all(bind=database.engine)
