@@ -1,4 +1,4 @@
-# In file: backend/Dockerfile
+# In file: backend/Dockerfile (Reverted to original version)
 
 # Use an official Python runtime as a parent image
 FROM python:3.11-slim
@@ -16,6 +16,4 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 COPY ./app /code/app
 
 # Command to run the application
-# Uvicorn needs --host 0.0.0.0 to be accessible outside the container.
-# Render provides the port via the $PORT environment variable.
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "10000"]
