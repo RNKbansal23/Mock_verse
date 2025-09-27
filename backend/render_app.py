@@ -3,7 +3,7 @@
 import os
 import io
 import json
-import fitz  # PyMuPDF
+import fitz
 import docx
 import google.generativeai as genai
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Depends, Form, UploadFile, File, HTTPException
