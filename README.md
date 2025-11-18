@@ -4,7 +4,7 @@ MockVerse is an **AI-powered mock interview platform** designed to revolutionize
 
 By using a sophisticated AI engine powered by the **Google Gemini LLM**, the platform asks dynamic, context-aware questions, listens to responses in real-time, and generates detailed, actionable feedback.
 
-![MockVerse Interface Placeholder](https://via.placeholder.com/1200x300.png?text=MockVerse)
+![MockVerse Interface Placeholder](https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcR6GQdN1T7sUCmjfxWVsXEKMJer40LkK0ZQilMLyhKpMkSbUi7wBhd8x1QCbnIQBkAvg2msSkDtBTfQmaSjwyBaybiyMnICHZjqHirFUf4HiDBwY30)
 
 ---
 
