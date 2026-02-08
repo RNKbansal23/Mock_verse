@@ -69,7 +69,7 @@ Follow these steps to set up and run MockVerse locally.
 
 #### 1. Clone the Repository
 
-```bash
+bash
 git clone [https://github.com/your-username/mockverse.git](https://github.com/your-username/mockverse.git)
 cd mockverse
 2. Backend Setup (FastAPI)
