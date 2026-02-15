@@ -13,12 +13,9 @@ from sqlalchemy.orm import sessionmaker, relationship, Session
 from sqlalchemy.ext.declarative import declarative_base
 from pydantic import BaseModel
 from pydantic_settings import BaseSettings
-<<<<<<< HEAD
 from dotenv import load_dotenv
 load_dotenv() # This will load variables from your .env file
 
-=======
->>>>>>> 794415fbaf8acc34ffa5bb4958532cf1ec286201
 
 # --- 1. CONFIGURATION ---
 class Settings(BaseSettings):
