@@ -1,4 +1,4 @@
-# MockVerse: The AI-Powered Conversational Mock Interview Platform 🎙️🧠
+# MockVerse: The AI-Powered Conversational Mock Interview Platform where u can practicee 🎙️🧠
 
 MockVerse is an **AI-powered mock interview platform** designed to revolutionize how software developers prepare for technical interviews. It provides a **realistic, hands-free, and purely conversational** environment that accurately simulates the pressure and natural flow of a real-world interview.
 
