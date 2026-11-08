@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1360 940" role="img" aria-labelledby="title desc">
+<title id="title">MockVerse animated system architecture</title>
+<desc id="desc">Animated overview showing the candidate, Next.js frontend, FastAPI REST and WebSocket interfaces, Gemini AI, resume parsing, PostgreSQL storage, and feedback report.</desc>
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#080d21"/><stop offset=".55" stop-color="#101735"/><stop offset="1" stop-color="#171235"/></linearGradient>
+ <linearGradient id="blue" x2="1"><stop stop-color="#32d6ff"/><stop offset="1" stop-color="#617cff"/></linearGradient>
+ <linearGradient id="purple" x2="1"><stop stop-color="#ae7aff"/><stop offset="1" stop-color="#ef76d5"/></linearGradient>
+ <linearGradient id="mint" x2="1"><stop stop-color="#4ce8c2"/><stop offset="1" stop-color="#46b5ff"/></linearGradient>
+ <linearGradient id="orange" x2="1"><stop stop-color="#ffb86c"/><stop offset="1" stop-color="#ff7a98"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <marker id="arrBlue" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9" fill="none" stroke="#55b9ff" stroke-width="1.8"/></marker>
+ <marker id="arrPink" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9" fill="none" stroke="#dc8bff" stroke-width="1.8"/></marker>
+ <style>
+ .heading{font:700 34px system-ui,-apple-system,'Segoe UI',sans-serif;fill:#f5f7ff;letter-spacing:.5px}.subtitle{font:400 15px system-ui,sans-serif;fill:#a9b9d5}.tag{font:700 12px system-ui,sans-serif;letter-spacing:2px;fill:#788bac}.label{font:700 21px system-ui,sans-serif;fill:#f7f8ff}.detail{font:400 14px system-ui,sans-serif;fill:#afbedb}.small{font:600 12px system-ui,sans-serif;fill:#cad5eb}.step{font:600 12px system-ui,sans-serif;fill:#f9fcff}.box{fill:#101a34;stroke:#344a70;stroke-width:1.6}.flow{fill:none;stroke:#55b9ff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrBlue);stroke-dasharray:9 9;animation:dash 2s linear infinite}.flow2{fill:none;stroke:#d78bff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrPink);stroke-dasharray:9 9;animation:dash 2s linear infinite}.pulse{animation:pulse 3s ease-in-out infinite;transform-box:fill-box;transform-origin:center}.halo{animation:glimmer 4s ease-in-out infinite}@keyframes dash{to{stroke-dashoffset:-36}}@keyframes pulse{50%{opacity:.65}}@keyframes glimmer{50%{opacity:.4}}@media(prefers-reduced-motion:reduce){.flow,.flow2,.pulse,.halo{animation:none}}
+ </style>
+</defs>
+<rect width="1360" height="940" rx="26" fill="url(#bg)"/>
+<g opacity=".16"><circle cx="1280" cy="70" r="170" fill="#8c50ff" filter="url(#glow)"/><circle cx="55" cy="770" r="145" fill="#00d5f5" filter="url(#glow)"/></g>
+<text x="62" y="65" class="tag">MOCKVERSE  /  SYSTEM DESIGN</text>
+<text x="62" y="114" class="heading">The AI interview, end to end</text>
+<text x="62" y="144" class="subtitle">Role + optional résumé → spoken conversation → contextual AI follow-ups → evidence-based feedback</text>
+<rect x="55" y="177" width="1250" height="622" rx="24" fill="#0b142b" stroke="#263454"/>
+<text x="83" y="212" class="tag">CLIENT</text><text x="407" y="212" class="tag">APPLICATION SERVER</text><text x="1030" y="212" class="tag">EXTERNAL AI</text>
+<!-- candidate -->
+<rect x="82" y="246" width="270" height="138" rx="18" class="box" stroke="#4e8dce"/>
+<circle cx="116" cy="281" r="16" fill="#163d60" stroke="#4dd6ff"/><text x="110" y="287" font-size="18" fill="#7ee9ff">◉</text>
+<text x="142" y="288" class="label">Candidate</text><text x="105" y="319" class="detail">Role + optional résumé</text><text x="105" y="342" class="detail">Microphone + camera preview</text>
+<rect x="82" y="432" width="270" height="203" rx="18" class="box" stroke="#2dadd2"/>
+<rect x="101" y="451" width="90" height="22" rx="11" fill="#164663"/><text x="115" y="467" class="step">NEXT.JS</text>
+<text x="103" y="507" class="label">Interview UI</text><text x="103" y="536" class="detail">Browser speech recognition</text><text x="103" y="559" class="detail">Speech synthesis (TTS)</text><text x="103" y="582" class="detail">Speaking / listening states</text><text x="103" y="608" class="detail">Transcript + controls</text>
+<!-- server -->
+<rect x="417" y="256" width="273" height="146" rx="18" class="box" stroke="#a477e8"/>
+<rect x="436" y="274" width="125" height="23" rx="11" fill="#452c68"/><text x="451" y="290" class="step">FASTAPI REST</text><text x="438" y="329" class="label">Session setup</text><text x="438" y="355" class="detail">POST /api/v1/interviews</text><text x="438" y="377" class="detail">Role + multipart résumé</text>
+<rect x="417" y="454" width="273" height="181" rx="18" class="box" stroke="#a477e8"/>
+<rect x="436" y="472" width="135" height="23" rx="11" fill="#452c68"/><text x="449" y="488" class="step">WEBSOCKET</text><text x="438" y="527" class="label">Conversation loop</text><text x="438" y="553" class="detail">/ws/interviews/{id}</text><text x="438" y="577" class="detail">Save answer → AI follow-up</text><text x="438" y="601" class="detail">Return question to browser</text>
+<!-- parsing -->
+<rect x="743" y="256" width="227" height="146" rx="18" class="box" stroke="#ffc17e"/>
+<rect x="762" y="274" width="135" height="23" rx="11" fill="#64422c"/><text x="774" y="290" class="step">DOCUMENTS</text><text x="763" y="330" class="label">Résumé parser</text><text x="763" y="354" class="detail">PDF / DOCX / TXT</text><text x="763" y="377" class="detail">Extract text for prompts</text>
+<!-- AI -->
+<rect x="1014" y="256" width="263" height="379" rx="22" fill="#171635" stroke="#ad7cff" stroke-width="2"/>
+<rect x="1035" y="279" width="221" height="69" rx="13" fill="#372554" stroke="#a877ff"/>
+<circle cx="1070" cy="313" r="13" fill="#c18aff" class="pulse" filter="url(#glow)"/><text x="1095" y="319" class="label" font-size="18">Gemini 2.5 Flash</text>
+<text x="1038" y="385" class="detail">Initial role-based question</text><text x="1038" y="412" class="detail">Résumé-conditioned context</text><text x="1038" y="439" class="detail">Multi-turn follow-up prompts</text><line x1="1037" y1="463" x2="1252" y2="463" stroke="#604784"/><text x="1038" y="498" class="label" font-size="18">Feedback engine</text><text x="1038" y="526" class="detail">Full transcript analysis</text><text x="1038" y="554" class="detail">Score / 10</text><text x="1038" y="581" class="detail">Strengths + improvements</text>
+<!-- db -->
+<rect x="744" y="454" width="225" height="181" rx="18" class="box" stroke="#4ce8c2"/>
+<rect x="764" y="473" width="133" height="23" rx="11" fill="#174c4b"/><text x="776" y="489" class="step">POSTGRESQL</text>
+<text x="765" y="527" class="label">Persistence</text><text x="765" y="556" class="detail">SQLAlchemy ORM</text><text x="765" y="582" class="detail">Interviews + turns</text><text x="765" y="605" class="detail">Ordered conversation history</text>
+<!-- arrows -->
+<path d="M217 384V426" class="flow"/><path d="M353 306H408" class="flow"/><path d="M353 548H408" class="flow"/>
+<path d="M690 312H735" class="flow2"/><path d="M970 312H1006" class="flow2"/>
+<path d="M690 538H735" class="flow"/><path d="M969 548H1006" class="flow2"/>
+<path d="M852 454V409" class="flow2"/><path d="M1010 620H985V697H555V640" class="flow2"/>
+<rect x="693" y="659" width="302" height="28" rx="14" fill="#1e2a43"/><text x="706" y="678" class="small">AI response and feedback via backend</text>
+<!-- feedback -->
+<rect x="419" y="715" width="553" height="55" rx="15" fill="#142c43" stroke="#4ec8ff"/>
+<text x="445" y="749" class="label" font-size="18">Feedback page: summary • strengths • improvements • score</text>
+<path d="M416 742H364V635" class="flow"/>
+<!-- legend footer -->
+<g transform="translate(78 838)"><circle r="7" fill="#4bc5fb"/><text x="15" y="5" class="small">Browser / REST</text><circle cx="229" r="7" fill="#bb87ff"/><text x="244" y="5" class="small">AI / prompt flow</text><circle cx="450" r="7" fill="#4ce8c2"/><text x="465" y="5" class="small">Database</text><circle cx="640" r="7" fill="#ffb66e"/><text x="655" y="5" class="small">Résumé parsing</text></g>
+<text x="80" y="897" class="subtitle">Live mode: REST starts the session; WebSocket carries interview turns. Mock mode substitutes local simulated responses.</text>
+</svg>
